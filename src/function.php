@@ -1,5 +1,6 @@
 <?php 
 session_start();
+
 $arr = array(array('id'=>'101','img'=>'football.png','price'=>'$150.00','name'=>'foot ball'),
 array('id'=>'102','img'=>'tennis.png','price'=>'$120.00','name'=>'tennis'),
 array('id'=>'103','img'=>'basketball.png','price'=>'$90.00','name'=>'Basket ball'),
@@ -26,5 +27,17 @@ function getproduct($id,$arr){
                 return $val ;
             }
     }
+}
+
+function checkIfProductExists($id){
+    $cart = $_SESSION['cart'];
+
+    foreach($cart as $key => $val){
+        if($val['id'] == $id){
+            return true ;
+        }
+    }
+
+    return false;
 }
 ?>

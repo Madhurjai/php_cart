@@ -1,16 +1,56 @@
 <?php 
-session_start();
-include('function.php');
-echo display($arr);
-// echo $arr ;
-$id = $_POST['listid'];
-foreach($arr as $key => $val){
-	if($id ==)
-}
-$product = getproduct($id,$arr);
-$cart = array();
-array_push($cart,$product);
-$_SESSION['cart'] = $cart ;
+	session_start();
+	// session_destroy();
+	include('function.php');
+	//include('cart.php');
+
+	$cart = isset($_SESSION['cart'])?$_SESSION['cart']:array();
+
+	if(isset($_POST['listid'])){
+
+		// echo $arr ;
+		$id = $_POST['listid'];
+		$product = getproduct($id,$arr);
+		
+		
+		
+		// $cart = array();
+		//$_SESSION['cart'];
+		//$quant = 0 ;
+		// var_dump(sizeof($cart));
+		if(sizeof($cart) == 0){
+			$product['quantity'] = 1 ;
+			array_push($cart, $product);
+			echo "if one";
+		}else{
+			echo "if else";
+			if(checkIfProductExists($id)){
+				//$quant += 1 ;
+				//$product['quantity'] += 1 ;
+				foreach($cart as $key => $val){
+					if($val['id'] == $product['id']){
+						$cart[$key]['quantity'] += 1; 
+					}				
+				}
+			//    $_SESSION['cart'];
+			//    print_r($_SESSION['cart']) ;
+			}else{
+				$product['quantity'] = 1 ;
+				array_push($cart, $product);
+			}
+		}
+
+
+		
+
+		$_SESSION['cart'] = $cart;
+
+	}
+	
+
+echo '<pre>';
+print_r($_SESSION['cart']) ;
+echo '</pre>';
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,7 +73,7 @@ $_SESSION['cart'] = $cart ;
 	</div>
 	<div id="main">
 		<div id="products">
-			
+			<?php echo display($arr); ?>
 		</div>
 	</div>
 	<div class="table"></div>
