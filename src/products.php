@@ -2,7 +2,6 @@
 	session_start();
 	// session_destroy();
 	include('function.php');
-	//include('cart.php');
 
 	$cart = isset($_SESSION['cart'])?$_SESSION['cart']:array();
 
@@ -48,9 +47,9 @@
 	}
 	
 
-echo '<pre>';
-print_r($_SESSION['cart']) ;
-echo '</pre>';
+// echo '<pre>';
+// print_r($_SESSION['cart']) ;
+// echo '</pre>';
 ?>
 <!DOCTYPE html>
 <html>
@@ -76,7 +75,9 @@ echo '</pre>';
 			<?php echo display($arr); ?>
 		</div>
 	</div>
-	<div class="table"></div>
+	<div class="table">
+	<?php echo display_table(); ?>
+	</div>
 	<div id="footer">
 		<nav>
 			<ul id="footer-links">

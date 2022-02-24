@@ -40,4 +40,17 @@ function checkIfProductExists($id){
 
     return false;
 }
+function display_table(){
+    $cart = $_SESSION['cart'];
+    $total_price = 0 ;
+    $tab = "<table class = 'tabl' style = 'border : 2px solid black ; width : 400px ; margin :auto; '><tr><th>ID</th><th>Name</th><th>Price</th><th>quantity</th></tr>" ;
+    foreach($cart as $key => $val){
+         $tab .= "<tr><td>".$val['id']."</td><td>".$val['name']."</td><td>".$val['price']."</td>
+         <td>".$val['quantity']."</td></tr>" ;
+         $total_price += (int)$val['price']*(int)$val['quantity'] ;
+    }
+    $tab .= "<tr><td colspan = '3'>total price : ".$total_price."</td></tr></table>" ;
+    return $tab ;
+
+}
 ?>
