@@ -1,11 +1,11 @@
 <?php 
 session_start();
 
-$arr = array(array('id'=>'101','img'=>'football.png','price'=>'$150.00','name'=>'foot ball'),
-array('id'=>'102','img'=>'tennis.png','price'=>'$120.00','name'=>'tennis'),
-array('id'=>'103','img'=>'basketball.png','price'=>'$90.00','name'=>'Basket ball'),
-array('id'=>'104','img'=>'table-tennis.png','price'=>'$110.00','name'=>'table tannis'),
-array('id'=>'105','img'=>'soccer.png','price'=>'$80.00','name'=>'soccar'));
+$arr = array(array('id'=>'101','img'=>'football.png','price'=>'150.00','name'=>'foot ball'),
+array('id'=>'102','img'=>'tennis.png','price'=>'120.00','name'=>'tennis'),
+array('id'=>'103','img'=>'basketball.png','price'=>'90.00','name'=>'Basket ball'),
+array('id'=>'104','img'=>'table-tennis.png','price'=>'110.00','name'=>'table tannis'),
+array('id'=>'105','img'=>'soccer.png','price'=>'80.00','name'=>'soccar'));
 
 
 
@@ -48,6 +48,8 @@ function display_table(){
          $tab .= "<tr><td>".$val['id']."</td><td>".$val['name']."</td><td>".$val['price']."</td>
          <td>".$val['quantity']."</td></tr>" ;
          $total_price += (int)$val['price']*(int)$val['quantity'] ;
+        //  print_r($total_price);
+        echo $val['price'];
     }
     $tab .= "<tr><td colspan = '3'>total price : ".$total_price."</td></tr></table>" ;
     return $tab ;
