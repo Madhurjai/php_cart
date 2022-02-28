@@ -2,6 +2,7 @@
 	session_start();
 	// session_destroy();
 	include('function.php');
+	//include('cart.php');
 
 	$cart = isset($_SESSION['cart'])?$_SESSION['cart']:array();
 
@@ -20,9 +21,9 @@
 		if(sizeof($cart) == 0){
 			$product['quantity'] = 1 ;
 			array_push($cart, $product);
-			echo "if one";
+			// echo "if one";
 		}else{
-			echo "if else";
+			
 			if(checkIfProductExists($id)){
 				//$quant += 1 ;
 				//$product['quantity'] += 1 ;
@@ -42,9 +43,21 @@
 
 		
 
-		$_SESSION['cart'] = $cart;
-
+		// print_r($_POST['pro_id']);
+		
+	
+			$_SESSION['cart'] = $cart;
+		
 	}
+	// if(isset($_POST['action'])){
+	// 	// $cart = $_SESSION['cart'];
+	// 	foreach($cart as $key => $val){
+	// 		if($val['id'] == $_POST['pro_id']){
+	// 			$_SESSION['cart'][$key]['quantity'] += $_POST['input'];
+	// 		}
+	// 	}
+		 
+	// }
 	
 
 // echo '<pre>';
@@ -76,7 +89,11 @@
 		</div>
 	</div>
 	<div class="table">
-	<?php echo display_table(); ?>
+	<?php 
+			echo display_cart($arr) ;
+			
+			
+			?>
 	</div>
 	<div id="footer">
 		<nav>

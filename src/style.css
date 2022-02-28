@@ -143,11 +143,23 @@ body{
 	border-radius: 5px;
 	border: 1px solid #cccccc; 
 }
-.table{
+table , tr, th,td{
+	border: 2px solid black;
+	border-collapse: collapse;
+}
+table{
 	width: 400px;
 	margin: auto;
 }
-#products{
-	float: left;
+td{
+	padding: 10px;
 }
-
+form{
+	float : left ;
+	padding: 30px;
+}
+.clear_cart{
+	margin-left : 50px ;
+	padding: 10px;
+	background-color: red;
+}

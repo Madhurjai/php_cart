@@ -40,19 +40,54 @@ function checkIfProductExists($id){
 
     return false;
 }
-function display_table(){
-    $cart = $_SESSION['cart'];
-    $total_price = 0 ;
-    $tab = "<table class = 'tabl' style = 'border : 2px solid black ; width : 400px ; margin :auto; '><tr><th>ID</th><th>Name</th><th>Price</th><th>quantity</th></tr>" ;
+function display_cart(){
+	$cart = isset($_SESSION['cart'])?$_SESSION['cart']:array();
+    $total = 0 ;
+    $tab = "<table><form method = 'POST'><button class = 'clear_cart' name = 'clearcart'>X</button></form>
+    <tr><th>ID</th><th>NAME</th>
+    <th>PRICE</th><th>QUANTITY</th><th>QUANTITY update</th></tr>";
     foreach($cart as $key => $val){
-         $tab .= "<tr><td>".$val['id']."</td><td>".$val['name']."</td><td>".$val['price']."</td>
-         <td>".$val['quantity']."</td></tr>" ;
-         $total_price += (int)$val['price']*(int)$val['quantity'] ;
-        //  print_r($total_price);
-        echo $val['price'];
-    }
-    $tab .= "<tr><td colspan = '3'>total price : ".$total_price."</td></tr></table>" ;
-    return $tab ;
-
+        $tab .= "<form method = 'POST' action = ''><tr><td>".$val['id']."</td>
+        <td>".$val['name']."</td>
+        <td>".$val['price']."</td>
+        <td>".$val['quantity']."</td>
+        <td>
+        <input type = 'number'  name = 'input'>
+        <button  name = 'action' >update</button>
+       </td>
+        <td>
+        <button  name = 'delete' >remove</button>
+        <input type='hidden' name ='pro' value = '".$val['id']."' >
+        </td></tr></form>";
+        $total += (int)$val['price']*(int)$val["quantity"] ;
+        // echo $val['price'];
+    } 
+     $tab .= "<tr><td colspan = '6'>total price : ".$total."</td></tr></table>";
+     return $tab ;
 }
+if(isset($_POST['action'])){
+    $cart = isset($_SESSION['cart'])?$_SESSION['cart']:array();
+    $id = $_POST['pro'];
+    foreach($cart as $key => $val){
+        if($val['id'] == $id){
+            $_SESSION['cart'][$key]['quantity'] += $_POST['input'];
+        }
+    }
+     
+}
+if(isset($_POST['delete'])){
+    $cart = isset($_SESSION['cart'])?$_SESSION['cart']:array();
+    $id = $_POST['pro'];
+    foreach($cart as $key => $val){
+        if($val['id'] == $id){
+            array_splice($_SESSION['cart'],$key,1);
+        }
+    }
+     
+}
+if(isset($_POST['clearcart'])){
+    // $cart = isset($_SESSION['cart'])?$_SESSION['cart']:array();
+   $_SESSION['cart'] = array();   
+}
+
 ?>
